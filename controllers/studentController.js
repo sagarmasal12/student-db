@@ -59,4 +59,30 @@ const createStudent = async(req,res)=>{
     }
 }
 
-module.exports = {getStudent,createStudent}
+const deleteStudent =async (req,res)=>{
+    try {
+        const studentId = req.params.id;
+        if(!studentId){
+            return res.status(404).send({
+                success:false,
+                message:"Id not provide pls provide id or Invalid Data"
+
+            })
+        }
+        
+        await db.query('DELETE FROM studentdata WHERE student_id=?',[studentId])
+        res.status(200).send({
+            success:true,
+            message:"Student Delete Successfully.."
+        })
+        
+    } catch (error) {
+        console.log(error),
+        res.status(500).send({
+            success:false,
+            message:"Data Not Found For Deleted"
+        })
+    }
+}
+
+module.exports = {getStudent,createStudent,deleteStudent}
