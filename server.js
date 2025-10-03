@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mySqlPool = require("./config/db");
 const color = require("colors");
+const cors = require('cors'); // import cors
+
 
 const studentRoutes = require("./routes/studentRoute");
 
@@ -13,6 +15,9 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cors({
+  origin:'http://localhost:4209'
+}))
 
 app.use("", studentRoutes);
 app.get("/test", (req, res) => {
