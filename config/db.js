@@ -4,7 +4,7 @@ const mySqlPool = mysql.createPool({
     host:'localhost',
     user:'root',
     password:"root",
-    database:"student-db"
+    database:"studentdb"
 })
 
 module.exports = mySqlPool
