@@ -24,6 +24,31 @@ const getStudent = async (req,res) =>{
         })
     }
 }
+const getCourse = async (req,res) =>{
+    try {
+        const data = await db.query('SELECT * FROM courses')
+        if(!data){
+           return res.status(401).send({
+                success:false,
+                message:"data not found in db",
+                error
+            })
+        }
+        res.status(200).send({
+            success:true,
+            message:"Student Data Found successfully..",
+            data:data[0],
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:"false",
+            message:"Student Data Not Found",
+            
+        })
+    }
+}
+
 
 const createStudent = async(req,res)=>{
     try {
@@ -85,4 +110,4 @@ const deleteStudent =async (req,res)=>{
     }
 }
 
-module.exports = {getStudent,createStudent,deleteStudent}
+module.exports = {getStudent,createStudent,deleteStudent,getCourse}
